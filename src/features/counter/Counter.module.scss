@@ -13,7 +13,7 @@
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .button {
@@ -40,7 +40,8 @@
   margin-right: 8px;
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
   border: 2px solid rgba(112, 76, 182, 0.4);
 }
 
@@ -49,26 +50,27 @@
 }
 
 .asyncButton {
-  composes: button;
-  position: relative;
+  @extend .button;
+  position: relative; // << non-static position element; the anchor
   margin-left: 8px;
-}
 
-.asyncButton:after {
-  content: "";
-  background-color: rgba(112, 76, 182, 0.15);
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transition: width 1s linear, opacity 0.5s ease 1s;
-}
+  &:after {
+    content: "";
+    background-color: rgba(112, 76, 182, 0.15);
+    display: block;
+    position: absolute; // <<< absolute
+    width: 100%;  // imagine me as a cloth; I've got the button fully covered (width 100%)
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0; // but you can't see me 
+    transition: width 3s linear, opacity 0.5s ease 3s; // width change is expensive , it takes 3 seconds;
+    // opacity change takes 0.5s
+  }
 
-.asyncButton:active:after {
-  width: 0%;
-  opacity: 1;
-  transition: 0s
+  &:active:after { // once clicked
+    width: 0%;  // I'm going to remove the cloth completely, but really really slowly (3 seconds)
+    opacity: 1; // I start showing up, after 0.5s you will see me clearly; at that time, I'm covering 83% of the button
+    transition: 0s;
+  }
 }
