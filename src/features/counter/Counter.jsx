@@ -51,6 +51,9 @@ export function Counter() {
         <Button
           onClick={() => {
             setCancelStatus(true);
+            setTimeout(() => {
+              setCancelStatus(false);
+            }, 10);
             dispatch(cancel());
           }} /* let epic know don't take emitted value */
         >
