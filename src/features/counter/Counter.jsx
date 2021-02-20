@@ -8,6 +8,7 @@ import {
   incrementAsync,
   selectCount,
 } from "./counterSlice";
+import { Button, AsyncButton } from "../button";
 import styles from "./Counter.module.scss";
 
 const cx = classNames.bind(styles);
@@ -22,19 +23,9 @@ export function Counter() {
   return (
     <div>
       <div className={cx("row")}>
-        <button
-          className={cx("button")}
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </button>
+        <Button onClick={() => dispatch(increment())}>+</Button>
         <span className={cx("value")}>{count}</span>
-        <button
-          className={cx("button")}
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
+        <Button onClick={() => dispatch(decrement())}>-</Button>
       </div>
       <div className={cx("row")}>
         <input
@@ -42,20 +33,18 @@ export function Counter() {
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
-        <button
-          className={cx("button")}
+        <Button
           onClick={() =>
             dispatch(incrementByAmount(Number(incrementAmount) || 0))
           }
         >
           Add Amount
-        </button>
-        <button
-          className={cx("asyncButton")}
+        </Button>
+        <AsyncButton
           onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
         >
           Add Async
-        </button>
+        </AsyncButton>
       </div>
     </div>
   );

@@ -1,0 +1,58 @@
+$color: rgb(112, 76, 182);
+$bg-color: rgb(112, 76, 182);
+$border-color: rgb(112, 76, 182);
+
+@function buildRGBAColor($base, $alpha) {
+  @return rgba(red($base), green($base), blue($base), $alpha);
+}
+
+.button {
+  appearance: none;
+  background: none;
+  font-size: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  outline: none;
+  border: 2px solid transparent;
+  color: $color;
+  padding-bottom: 4px;
+  cursor: pointer;
+  background-color: buildRGBAColor($bg-color, 0.1);
+  border-radius: 2px;
+  transition: all 0.15s;
+
+  &:hover,
+  &:focus {
+    border: 2px solid buildRGBAColor($border-color, 0.4);
+  }
+  &:active {
+    background-color: buildRGBAColor($bg-color, 0.2);
+  }
+}
+
+.asyncButton {
+  @extend .button;
+  position: relative; // << non-static position element; the anchor
+  margin-left: 8px;
+
+  &:after {
+    content: "";
+    background-color: buildRGBAColor($bg-color, 0.15);
+    display: block;
+    position: absolute; // <<< absolute
+    width: 100%; // imagine me as a cloth; I've got the button fully covered (width 100%)
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0; // but you can't see me
+    transition: width 3s linear, opacity 0.5s ease 3s; // width change is expensive , it takes 3 seconds;
+    // opacity change takes 0.5s
+  }
+
+  &:active:after {
+    // once clicked
+    width: 0%; // I'm going to remove the cloth completely, but really really slowly (3 seconds)
+    opacity: 1; // I start showing up, after 0.5s you will see me clearly; at that time, I'm covering 83% of the button
+    transition: 0s;
+  }
+}
