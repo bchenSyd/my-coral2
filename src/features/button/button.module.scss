@@ -54,4 +54,10 @@ $border-color: rgb(112, 76, 182);
     opacity: 1; // I start showing up, after 0.5s you will see me clearly; at that time, I'm covering 83% of the button
     transition: 0s;
   }
+
+  &.no-transition {  // it's critical to have `&`, otherwise .no-transition is only picked for it's children element (not for itself)
+    &:after {
+      transition: none !important;
+    }
+  }
 }

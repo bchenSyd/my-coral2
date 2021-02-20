@@ -20,6 +20,7 @@ export function Counter() {
   //**********************************************************************************************/
 
   const [incrementAmount, setIncrementAmount] = useState("2");
+  const [cancelling, setCancelStatus] = useState(false);
 
   return (
     <div>
@@ -42,11 +43,19 @@ export function Counter() {
           Add Amount
         </Button>
         <AsyncButton
+          noTransition={cancelling}
           onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
         >
           Add Async
         </AsyncButton>
-        <Button onClick={() => dispatch(cancel())}>cancel</Button>
+        <Button
+          onClick={() => {
+            setCancelStatus(true);
+            dispatch(cancel());
+          }} /* let epic know don't take emitted value */
+        >
+          cancel
+        </Button>
       </div>
     </div>
   );

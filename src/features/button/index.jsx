@@ -11,9 +11,15 @@ const BaseButton = ({ onClick, children, className, ...rest }) => (
 
 // https://reactjs.org/docs/composition-vs-inheritance.html#specialization
 // Specialization
-export const Button = (props) => (
-  <BaseButton {...props} className={cx("button")} />
+export const Button = ({ className, ...rest }) => (
+  <BaseButton {...rest} className={classNames(classNames, cx("button"))} />
 );
-export const AsyncButton = (props) => (
-  <BaseButton {...props} className={cx("asyncButton")} />
+
+export const AsyncButton = ({ noTransition, ...rest }) => (
+  <BaseButton
+    {...rest}
+    className={classNames(
+      cx("asyncButton", { [cx("no-transition")]: noTransition })
+    )}
+  />
 );
