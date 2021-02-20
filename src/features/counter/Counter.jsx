@@ -6,6 +6,7 @@ import {
   increment,
   incrementByAmount,
   incrementAsync,
+  cancel,
   selectCount,
 } from "./counterSlice";
 import { Button, AsyncButton } from "../button";
@@ -45,6 +46,7 @@ export function Counter() {
         >
           Add Async
         </AsyncButton>
+        <Button onClick={() => dispatch(cancel())}>cancel</Button>
       </div>
     </div>
   );

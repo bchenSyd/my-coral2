@@ -2,11 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:not(:last-child){
+    margin-bottom: 16px;
+  }
+
+  >input, button{
+    margin-right: 8px;
+  }
 }
 
-.row:not(:last-child) {
-  margin-bottom: 16px;
-}
 
 .value {
   font-size: 78px;

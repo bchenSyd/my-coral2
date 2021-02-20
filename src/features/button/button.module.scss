@@ -33,7 +33,6 @@ $border-color: rgb(112, 76, 182);
 .asyncButton {
   @extend .button;
   position: relative; // << non-static position element; the anchor
-  margin-left: 8px;
 
   &:after {
     content: "";
@@ -45,7 +44,7 @@ $border-color: rgb(112, 76, 182);
     left: 0;
     top: 0;
     opacity: 0; // but you can't see me
-    transition: width 3s linear, opacity 0.5s ease 3s; // width change is expensive , it takes 3 seconds;
+    transition: width 1s linear, opacity 0.5s ease 1s; // changing my width is expensive,wich will take 3 seconds;
     // opacity change takes 0.5s
   }
 
