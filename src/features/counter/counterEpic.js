@@ -6,7 +6,7 @@ const counterEpic = (action$) =>
   action$.pipe(
     //  ofType(incrementAsync.type), // this works, verified;
     filter(incrementAsync.match),
-    delay(1000),
+    delay(3000),
     map(({ payload }) => incrementByAmount(payload))
   );
 
